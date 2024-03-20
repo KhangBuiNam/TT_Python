@@ -33,7 +33,7 @@ def bookTask():
                 temp= bookArray[i]
                 bookArray[i]=bookArray[j]
                 bookArray[j]= temp
-        print ("Book decrease order : ")
+        print ("Book price decrease : ")
         for i in bookArray:
             print(i.title)
 
