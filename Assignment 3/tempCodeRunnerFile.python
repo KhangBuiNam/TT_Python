@@ -1,41 +1,48 @@
-import os
-os.system('cls')
+class Human:
+    def __init__(self, ten):
+        self.ten = ten
 
-class Book:
-    def __init__(self, title=str,author=str, price=float ):
-        self.title= title
-        self.author= author
-        self.price = price
-    def View(self):
-        print(f'Book title: {self.title}')
-        print(f'Book author: {self.author}')
-        print(f'Book price: {self.price}')
-    
-def bookTask():
-    n= int(input("Enter value n: "))
-    bookArray= []
-    for i in range (n):
-        title = str(input('Enter title book:'))
-        author= str(input('Enter author book: '))
-        price = float(input('Enter price book: '))
-        bookArray.append(Book(title,author,price))
+class Student(Human):
+    def __init__(self, ten, mssv, dtb):
+        super().__init__(ten)
+        self.mssv = mssv
+        self.dtb = dtb
 
-        min_price= bookArray[0].price
-        min_price_name= bookArray[0]
-    for i in bookArray:
-        if min_price > i.price:
-            min_price= i.price
-            min_price_name= i
-    print (f"The book have min price: {min_price_name.title}")
-    for i in range(n-1):
-        for j in range(i+1,n):
-            if bookArray[i].price < bookArray[j].price:
-                temp= bookArray[i]
-                bookArray[i]=bookArray[j]
-                bookArray[j]= temp
-        print ("Book decrease order : ")
-        for i in bookArray:
-            print(i.title)
+class lophoc:
+    def __init__(self):
+        self.SL = int(input("Nhap so luong sinh vien trong lop: "))
+        self.DS = []
 
-if __name__ == '__main__':
-    bookTask()
+    def ds_sv(self):
+        for i in range(self.SL):
+            ten = input(f"Nhap ten cua sinh vien {i+1}: ")
+            mssv = input(f"Nhap MSSV cua sinh vien {i+1}: ")
+            dtb = float(input(f"Nhap diem trung binh cua sinh vien {i+1}: "))
+            self.DS.append(Student(ten, mssv, dtb))
+
+    def hien_thi(self):
+        print("Danh sach sinh vien trong lop:")
+        print(f"SL {self.SL}")
+        for sv in self.DS:
+            print(f"{sv.ten}, {sv.mssv}, {sv.dtb}")
+
+    def giam_dan(self):
+        print("Danh sach sinh vien trong lop theo diem giam dan:")
+        sv_giam_dan = sorted(self.DS, key=lambda x: x.dtb, reverse=True)
+        print(f"SL {self.SL}")
+        for i, sv in enumerate(sv_giam_dan):
+            print(f"{sv.ten}, {sv.mssv}, {sv.dtb}")
+
+    def cao_nhat(self):
+        sv_cao_nhat = max(self.DS, key=lambda x: x.dtb)
+        print("Thong tin cua sinh vien co so diem cao nhat:")
+        print(f"{sv_cao_nhat.ten}, {sv_cao_nhat.mssv}, {sv_cao_nhat.dtb}")
+
+def main():
+    lop = lophoc()
+    lop.ds_sv()
+    lop.hien_thi()
+    lop.giam_dan()
+    lop.cao_nhat()
+
+main()
